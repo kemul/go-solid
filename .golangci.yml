@@ -1,0 +1,11 @@
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+
+issues:
+  exclude-use-default: false
+  exclude:
+    - "should have comment or be unexported"
+  exclude-dirs:
+    - vendor

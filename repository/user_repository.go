@@ -2,7 +2,7 @@ package repository
 
 import (
 	"database/sql"
-	"project/domain"
+	"go-solid/domain"
 )
 
 type postgresUserRepository struct {

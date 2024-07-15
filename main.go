@@ -29,13 +29,15 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer db.Close()
+	defer func() {
+		if err := db.Close(); err != nil {
+			log.Printf("Failed to close database: %v", err)
+		}
+	}()
 
 	userRepo := database.NewPostgresUserRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepo)
 	userHandler := deliveryHttp.NewUserHandler(userUsecase)
-
-	fmt.Println("GO Solid")
 
 	http.HandleFunc("/user", userHandler.GetUser)
 	http.HandleFunc("/user/create", userHandler.CreateUser)
